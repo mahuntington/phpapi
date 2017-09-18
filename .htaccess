@@ -1,0 +1,3 @@
+RewriteEngine On
+RewriteCond %{REQUEST_METHOD} ^DELETE$
+RewriteRule ^([0-9]+)$ delete.php?id=$1
