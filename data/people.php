@@ -1,5 +1,5 @@
 <?php
-    include 'models/person.php';
+    include __DIR__ . '/../models/person.php';
     $people = array();
 
     $people[] = new Person('joni', 52);

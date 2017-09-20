@@ -1,6 +1,6 @@
 RewriteEngine On
 RewriteCond %{REQUEST_METHOD} ^GET$
-RewriteRule ^people$ index.php
+RewriteRule ^people$ controllers/people.php?action=index
 RewriteCond %{REQUEST_METHOD} ^DELETE$
 RewriteRule ^people/([0-9]+)$ delete.php?id=$1
 RewriteCond %{REQUEST_METHOD} ^POST$
