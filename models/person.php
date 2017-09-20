@@ -29,16 +29,11 @@ class People {
 
         return self::find();
     }
-    static function delete($index){
-        $people = array();
-        $people[] = new Person('joni', 52);
-        $people[] = new Person('bob', 34);
-        $people[] = new Person('sally', 21);
-        $people[] = new Person('matt', 37);
+    static function delete($id){
+        $query = file_get_contents(__DIR__ . '/../database/sql/delete.sql');
+        $result = pg_query_params($query, array($id));
 
-        array_splice($people, $index, 1);
-
-        return $people;
+        return self::find();
     }
     static function update($index, $updatedPerson){
         $people = array();
