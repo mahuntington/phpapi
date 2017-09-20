@@ -1,7 +1,9 @@
 RewriteEngine On
+RewriteCond %{REQUEST_METHOD} ^GET$
+RewriteRule ^people$ index.php
 RewriteCond %{REQUEST_METHOD} ^DELETE$
-RewriteRule ^([0-9]+)$ delete.php?id=$1
+RewriteRule ^people/([0-9]+)$ delete.php?id=$1
 RewriteCond %{REQUEST_METHOD} ^POST$
-RewriteRule ^$ post.php
+RewriteRule ^people$ post.php
 RewriteCond %{REQUEST_METHOD} ^PUT$
-RewriteRule ^([0-9]+)$ update.php?id=$1
+RewriteRule ^people/([0-9]+)$ update.php?id=$1
