@@ -12,7 +12,8 @@ class Person {
 
 class People {
     static function find(){
-        $result = pg_query('SELECT * FROM people');
+        $query = file_get_contents(__DIR__ . '/../database/sql/find.sql');
+        $result = pg_query($query);
         $people = array();
         while($data = pg_fetch_object($result)){
             $people[] = new Person($data->name, intval($data->age));
