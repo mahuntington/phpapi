@@ -24,15 +24,10 @@ class People {
         return $people;
     }
     static function create($person){
-        $people = array();
-        $people[] = new Person('joni', 52);
-        $people[] = new Person('bob', 34);
-        $people[] = new Person('sally', 21);
-        $people[] = new Person('matt', 37);
+        $query = file_get_contents(__DIR__ . '/../database/sql/create.sql');
+        $result = pg_query_params($query, array($person->name, $person->age));
 
-        $people[] = $person;
-
-        return $people;
+        return self::find();
     }
     static function delete($index){
         $people = array();
