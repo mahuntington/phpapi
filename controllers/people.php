@@ -18,7 +18,7 @@ if($_REQUEST['action'] === 'index'){
 } else if ($_REQUEST['action'] === 'update'){
     $requestBody = file_get_contents('php://input');
     $body = json_decode($requestBody);
-    $updatedPerson = new Person($body->name, $body->age);
+    $updatedPerson = new Person(null, $body->name, $body->age);
     $allPeople = People::update($_REQUEST['id'], $updatedPerson);
 
     echo json_encode($allPeople);

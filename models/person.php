@@ -35,15 +35,11 @@ class People {
 
         return self::find();
     }
-    static function update($index, $updatedPerson){
-        $people = array();
-        $people[] = new Person('joni', 52);
-        $people[] = new Person('bob', 34);
-        $people[] = new Person('sally', 21);
-        $people[] = new Person('matt', 37);
+    static function update($id, $updatedPerson){
+        $query = file_get_contents(__DIR__ . '/../database/sql/update.sql');
+        $result = pg_query_params($query, array($updatedPerson->name, $updatedPerson->age, $id));
 
-        $people[$index] = $updatedPerson;
-        return $people;
+        return self::find();
     }
 }
 ?>
