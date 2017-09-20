@@ -1,3 +1,3 @@
 <?
-var_dump(getenv('DATABASE_URL'));
+var_dump(parse_url(getenv('DATABASE_URL')));
 ?>
