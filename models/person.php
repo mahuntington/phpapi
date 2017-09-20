@@ -1,4 +1,6 @@
 <?
+include_once __DIR__ . '/../database/db.php';
+
 class Person {
     public $name;
     public $age;
@@ -7,9 +9,9 @@ class Person {
         $this->age = $age;
     }
 }
+
 class People {
     static function find(){
-        $dbconn = pg_connect("host=localhost dbname=phpapi");
         $result = pg_query('SELECT * FROM people');
         $people = array();
         while($data = pg_fetch_object($result)){
