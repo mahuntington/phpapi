@@ -12,5 +12,8 @@
         $people[] = $zagthar;
 
         echo json_encode($people);
+    } else if ($_REQUEST['action'] === 'delete'){
+        array_splice($people, $_REQUEST['id'], 1);
+        echo json_encode($people);
     }
 ?>
