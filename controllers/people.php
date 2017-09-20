@@ -3,25 +3,24 @@
     include __DIR__ . '/../data/people.php';
 
     if($_REQUEST['action'] === 'index'){
-        echo json_encode($people);
+        echo json_encode(People::find());
     } else if ($_REQUEST['action'] === 'post'){
         $requestBody = file_get_contents('php://input');
         $body = json_decode($requestBody);
-        $zagthar = new Person($body->name, $body->age);
+        $newPerson = new Person($body->name, $body->age);
 
-        $people[] = $zagthar;
+        $allPeople = People::create($newPerson);
 
-        echo json_encode($people);
+        echo json_encode($allPeople);
     } else if ($_REQUEST['action'] === 'delete'){
-        array_splice($people, $_REQUEST['id'], 1);
-        echo json_encode($people);
+        $allPeople = People::delete($_REQUEST['id']);
+        echo json_encode($allPeople);
     } else if ($_REQUEST['action'] === 'update'){
         $requestBody = file_get_contents('php://input');
         $body = json_decode($requestBody);
-        $zagthar = new Person($body->name, $body->age);
+        $updatedPerson = new Person($body->name, $body->age);
+        $allPeople = People::update($_REQUEST['id'], $updatedPerson);
 
-        $people[$_REQUEST['id']] = $zagthar;
-
-        echo json_encode($people);
+        echo json_encode($allPeople);
     }
 ?>
