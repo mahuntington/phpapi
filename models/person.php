@@ -9,11 +9,12 @@ class Person {
 }
 class People {
     static function find(){
+        $dbconn = pg_connect("host=localhost dbname=phpapi");
+        $result = pg_query('SELECT * FROM people');
         $people = array();
-        $people[] = new Person('joni', 52);
-        $people[] = new Person('bob', 34);
-        $people[] = new Person('sally', 21);
-        $people[] = new Person('matt', 37);
+        while($data = pg_fetch_object($result)){
+            $people[] = new Person($data->name, intval($data->age));
+        }
 
         return $people;
     }
