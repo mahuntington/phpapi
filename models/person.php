@@ -17,7 +17,7 @@ class People {
 
         return $people;
     }
-    static function add($person){
+    static function create($person){
         $people = array();
         $people[] = new Person('joni', 52);
         $people[] = new Person('bob', 34);
