@@ -2,9 +2,11 @@
 include_once __DIR__ . '/../database/db.php';
 
 class Person {
+    public $id;
     public $name;
     public $age;
-    public function __construct($name, $age) {
+    public function __construct($id, $name, $age) {
+        $this->id = $id;
         $this->name = $name;
         $this->age = $age;
     }
@@ -16,7 +18,7 @@ class People {
         $result = pg_query($query);
         $people = array();
         while($data = pg_fetch_object($result)){
-            $people[] = new Person($data->name, intval($data->age));
+            $people[] = new Person(intval($data->id), $data->name, intval($data->age));
         }
 
         return $people;
