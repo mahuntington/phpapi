@@ -1,4 +1,6 @@
 RewriteEngine On
+
+# people routes
 RewriteCond %{REQUEST_METHOD} ^GET$
 RewriteRule ^people$ controllers/people.php?action=index
 RewriteCond %{REQUEST_METHOD} ^POST$
@@ -7,3 +9,13 @@ RewriteCond %{REQUEST_METHOD} ^DELETE$
 RewriteRule ^people/([0-9]+)$ controllers/people.php?action=delete&id=$1
 RewriteCond %{REQUEST_METHOD} ^PUT$
 RewriteRule ^people/([0-9]+)$ controllers/people.php?action=update&id=$1
+
+# companies routes
+RewriteCond %{REQUEST_METHOD} ^GET$
+RewriteRule ^companies$ controllers/companies.php?action=index
+RewriteCond %{REQUEST_METHOD} ^POST$
+RewriteRule ^companies$ controllers/companies.php?action=post
+RewriteCond %{REQUEST_METHOD} ^DELETE$
+RewriteRule ^companies/([0-9]+)$ controllers/companies.php?action=delete&id=$1
+RewriteCond %{REQUEST_METHOD} ^PUT$
+RewriteRule ^companies/([0-9]+)$ controllers/companies.php?action=update&id=$1
