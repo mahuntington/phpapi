@@ -1,43 +1,41 @@
 <?
 include_once __DIR__ . '/../database/db.php';
 
-class Person {
+class Company {
     public $id;
     public $name;
-    public $age;
-    public function __construct($id, $name, $age) {
+    public function __construct($id, $name) {
         $this->id = $id;
         $this->name = $name;
-        $this->age = $age;
     }
 }
 
-class People {
+class Companies {
     static function find(){
-        $query = file_get_contents(__DIR__ . '/../database/sql/people/find.sql');
+        $query = file_get_contents(__DIR__ . '/../database/sql/companies/find.sql');
         $result = pg_query($query);
-        $people = array();
+        $companies = array();
         while($data = pg_fetch_object($result)){
-            $people[] = new Person(intval($data->id), $data->name, intval($data->age));
+            $companies[] = new Company(intval($data->id), $data->name);
         }
 
-        return $people;
+        return $companies;
     }
-    static function create($person){
-        $query = file_get_contents(__DIR__ . '/../database/sql/people/create.sql');
-        $result = pg_query_params($query, array($person->name, $person->age));
+    static function create($company){
+        $query = file_get_contents(__DIR__ . '/../database/sql/companies/create.sql');
+        $result = pg_query_params($query, array($company->name));
 
         return self::find();
     }
     static function delete($id){
-        $query = file_get_contents(__DIR__ . '/../database/sql/people/delete.sql');
+        $query = file_get_contents(__DIR__ . '/../database/sql/companies/delete.sql');
         $result = pg_query_params($query, array($id));
 
         return self::find();
     }
-    static function update($id, $updatedPerson){
-        $query = file_get_contents(__DIR__ . '/../database/sql/people/update.sql');
-        $result = pg_query_params($query, array($updatedPerson->name, $updatedPerson->age, $id));
+    static function update($id, $updatedCompany){
+        $query = file_get_contents(__DIR__ . '/../database/sql/companies/update.sql');
+        $result = pg_query_params($query, array($updatedCompany->name, $id));
 
         return self::find();
     }
