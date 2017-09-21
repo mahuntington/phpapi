@@ -19,3 +19,7 @@ RewriteCond %{REQUEST_METHOD} ^DELETE$
 RewriteRule ^companies/([0-9]+)$ controllers/companies.php?action=delete&id=$1
 RewriteCond %{REQUEST_METHOD} ^PUT$
 RewriteRule ^companies/([0-9]+)$ controllers/companies.php?action=update&id=$1
+
+# jobs routes
+RewriteCond %{REQUEST_METHOD} ^POST$
+RewriteRule ^jobs$ controllers/jobs.php?action=post
