@@ -13,11 +13,21 @@ class Job {
 }
 
 class Jobs {
+    static function find(){
+        $query = file_get_contents(__DIR__ . '/../database/sql/jobs/find.sql');
+        $result = pg_query($query);
+        $jobs = array();
+        while($data = pg_fetch_object($result)){
+            $jobs[] = new Job(intval($data->id), intval($data->person_id), intval($data->company_id));
+        }
+
+        return $jobs;
+    }
     static function create($job){
         $query = file_get_contents(__DIR__ . '/../database/sql/jobs/create.sql');
         $result = pg_query_params($query, array($job->person_id, $job->company_id));
 
-        return true;
+        return self::find();
     }
 }
 ?>
