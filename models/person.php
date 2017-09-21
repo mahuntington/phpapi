@@ -14,7 +14,7 @@ class Person {
 
 class People {
     static function find(){
-        $query = file_get_contents(__DIR__ . '/../database/sql/find.sql');
+        $query = file_get_contents(__DIR__ . '/../database/sql/people/find.sql');
         $result = pg_query($query);
         $people = array();
         while($data = pg_fetch_object($result)){
@@ -24,19 +24,19 @@ class People {
         return $people;
     }
     static function create($person){
-        $query = file_get_contents(__DIR__ . '/../database/sql/create.sql');
+        $query = file_get_contents(__DIR__ . '/../database/sql/people/create.sql');
         $result = pg_query_params($query, array($person->name, $person->age));
 
         return self::find();
     }
     static function delete($id){
-        $query = file_get_contents(__DIR__ . '/../database/sql/delete.sql');
+        $query = file_get_contents(__DIR__ . '/../database/sql/people/delete.sql');
         $result = pg_query_params($query, array($id));
 
         return self::find();
     }
     static function update($id, $updatedPerson){
-        $query = file_get_contents(__DIR__ . '/../database/sql/update.sql');
+        $query = file_get_contents(__DIR__ . '/../database/sql/people/update.sql');
         $result = pg_query_params($query, array($updatedPerson->name, $updatedPerson->age, $id));
 
         return self::find();
