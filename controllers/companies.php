@@ -19,7 +19,7 @@ if($_REQUEST['action'] === 'index'){
     $requestBody = file_get_contents('php://input');
     $body = json_decode($requestBody);
     $updatedCompany = new Company(null, $body->name);
-    $allCompanies = People::update($_REQUEST['id'], $updatedCompany);
+    $allCompanies = Companies::update($_REQUEST['id'], $updatedCompany);
 
     echo json_encode($allCompanies);
 }
