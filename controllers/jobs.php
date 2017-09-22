@@ -8,7 +8,7 @@ if($_REQUEST['action'] === 'index'){
     $requestBody = file_get_contents('php://input');
     $body = json_decode($requestBody);
 
-    $newJob = new Job(null, $body->person_id, $body->company_id);
+    $newJob = new Job(null, $body->person_id, $body->job_type, $body->company_id);
 
     $allJobs = Jobs::create($newJob);
 
@@ -19,7 +19,7 @@ if($_REQUEST['action'] === 'index'){
 } else if ($_REQUEST['action'] === 'update'){
     $requestBody = file_get_contents('php://input');
     $body = json_decode($requestBody);
-    $updatedJob = new Job(null, $body->person_id, $body->company_id);
+    $updatedJob = new Job(null, $body->person_id, $body->job_type, $body->company_id);
     $allJobs = Jobs::update($_REQUEST['id'], $updatedJob);
 
     echo json_encode($allJobs);
