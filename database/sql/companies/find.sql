@@ -8,4 +8,5 @@ SELECT
     age
 FROM companies
 LEFT JOIN jobs ON companies.id = jobs.company_id
-LEFT JOIN people ON jobs.person_id = people.id;
+LEFT JOIN people ON jobs.person_id = people.id
+ORDER BY companies.id ASC;

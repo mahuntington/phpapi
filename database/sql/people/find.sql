@@ -8,4 +8,5 @@ SELECT
     companies.name AS company_name
 FROM people
 LEFT JOIN jobs ON people.id = jobs.person_id
-LEFT JOIN companies ON jobs.company_id = companies.id;
+LEFT JOIN companies ON jobs.company_id = companies.id
+ORDER BY people.id ASC;
