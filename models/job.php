@@ -29,5 +29,17 @@ class Jobs {
 
         return self::find();
     }
+    static function delete($id){
+        $query = file_get_contents(__DIR__ . '/../database/sql/jobs/delete.sql');
+        $result = pg_query_params($query, array($id));
+
+        return self::find();
+    }
+    static function update($id, $updatedJob){
+        $query = file_get_contents(__DIR__ . '/../database/sql/jobs/update.sql');
+        $result = pg_query_params($query, array($updatedJob->person_id, $updatedJob->company_id, $id));
+
+        return self::find();
+    }
 }
 ?>
