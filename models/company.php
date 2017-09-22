@@ -1,5 +1,7 @@
 <?
 include_once __DIR__ . '/../database/db.php';
+include_once __DIR__ . '/job.php';
+include_once __DIR__ . '/person.php';
 
 class Company {
     public $id;
@@ -15,8 +17,19 @@ class Companies {
         $query = file_get_contents(__DIR__ . '/../database/sql/companies/find.sql');
         $result = pg_query($query);
         $companies = array();
+        $current_company = null;
         while($data = pg_fetch_object($result)){
-            $companies[] = new Company(intval($data->id), $data->name);
+            if($current_company === null || $current_company->id !== intval($data->company_id)){
+                $current_company = new Company(intval($data->company_id), $data->company_name);
+                $current_company->employees = [];
+                $companies[] = $current_company;
+            }
+            if($data->job_id){
+                $new_person = new Person(intval($data->person_id), $data->person_name, intval($data->age));
+                $new_job = new Job(intval($data->job_id), null, $data->job_type, null);
+                $new_person->position = $new_job;
+                $current_company->employees[] = $new_person;
+            }
         }
 
         return $companies;
