@@ -19,13 +19,18 @@ class People {
         $query = file_get_contents(__DIR__ . '/../database/sql/people/find.sql');
         $result = pg_query($query);
         $people = array();
+        $current_person = null;
         while($data = pg_fetch_object($result)){
-            $found_person = new Person(intval($data->person_id), $data->person_name, intval($data->age));
-            if($data->job_id){
-                $found_person->job = new Job(intval($data->job_id), null, $data->job_type, null);
-                $found_person->job->company = new Company(intval($data->company_id), $data->company_name);
+            if($current_person === null || $current_person->id !== intval($data->person_id)){
+                $current_person = new Person(intval($data->person_id), $data->person_name, intval($data->age));
+                $current_person->jobs = [];
+                $people[] = $current_person;
             }
-            $people[] =$found_person;
+            if($data->job_id){
+                $new_job = new Job(intval($data->job_id), null, $data->job_type, null);
+                $new_job->company = new Company(intval($data->company_id), $data->company_name);
+                $current_person->jobs[] = $new_job;
+            }
         }
 
         return $people;
