@@ -3,14 +3,16 @@ include_once __DIR__ . '/../database/db.php';
 
 class Job {
     public $id;
-    public $person_id;
     public $job_type;
-    public $company_id;
     public function __construct($id, $person_id, $job_type, $company_id) {
         $this->id = $id;
-        $this->person_id = $person_id;
+        if($person_id){
+            $this->person_id = $person_id;
+        }
         $this->job_type = $job_type;
-        $this->company_id = $company_id;
+        if($company_id){
+            $this->company_id = $company_id;
+        }
     }
 }
 
