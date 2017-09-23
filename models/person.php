@@ -57,7 +57,7 @@ class People {
     }
     static function update($id, $updatedPerson){
         $query = file_get_contents(__DIR__ . '/../database/sql/people/update.sql');
-        $result = pg_query_params($query, array($updatedPerson->name, $updatedPerson->age, $id));
+        $result = pg_query_params($query, array($updatedPerson->name, $updatedPerson->age, $updatedPerson->location_id, $id));
 
         return self::find();
     }
