@@ -1,5 +1,6 @@
 <?
 include_once __DIR__ . '/../database/db.php';
+include_once __DIR__ . '/person.php';
 
 class Location {
     public $id;
@@ -19,8 +20,18 @@ class Locations {
         $query = file_get_contents(__DIR__ . '/../database/sql/locations/find.sql');
         $result = pg_query($query);
         $locations = array();
+        $current_location = null;
         while($data = pg_fetch_object($result)){
-            $locations[] = new Location(intval($data->id), $data->street, $data->city, $data->state);
+            if($current_location === null || $current_location->id !== intval($data->location_id)){
+                $current_location = new Location(intval($data->location_id), $data->street, $data->city, $data->state);
+                $current_location->residents = [];
+                $locations[] = $current_location;
+            }
+            if($data->person_id){
+                $new_person = new Person(intval($data->person_id), $data->name, intval($data->age));
+                $current_location->residents[] = $new_person;
+            }
+
         }
 
         return $locations;
