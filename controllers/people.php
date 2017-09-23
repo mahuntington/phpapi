@@ -7,7 +7,7 @@ if($_REQUEST['action'] === 'index'){
 } else if ($_REQUEST['action'] === 'post'){
     $requestBody = file_get_contents('php://input');
     $body = json_decode($requestBody);
-    $newPerson = new Person(null, $body->name, $body->age);
+    $newPerson = new Person(null, $body->name, $body->age, $body->location_id);
 
     $allPeople = People::create($newPerson);
 

@@ -8,10 +8,13 @@ class Person {
     public $id;
     public $name;
     public $age;
-    public function __construct($id, $name, $age) {
+    public function __construct($id, $name, $age, $location_id = null) {
         $this->id = $id;
         $this->name = $name;
         $this->age = $age;
+        if($location_id){
+            $this->location_id = $location_id;
+        }
     }
 }
 
@@ -42,7 +45,7 @@ class People {
     }
     static function create($person){
         $query = file_get_contents(__DIR__ . '/../database/sql/people/create.sql');
-        $result = pg_query_params($query, array($person->name, $person->age));
+        $result = pg_query_params($query, array($person->name, $person->age, $person->location_id));
 
         return self::find();
     }
