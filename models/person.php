@@ -2,6 +2,7 @@
 include_once __DIR__ . '/../database/db.php';
 include_once __DIR__ . '/job.php';
 include_once __DIR__ . '/company.php';
+include_once __DIR__ . '/location.php';
 
 class Person {
     public $id;
@@ -30,6 +31,10 @@ class People {
                 $new_job = new Job(intval($data->job_id), null, $data->job_type, null);
                 $new_job->company = new Company(intval($data->company_id), $data->company_name);
                 $current_person->jobs[] = $new_job;
+            }
+            if($data->location_id){
+                $new_location = new Location(intval($data->location_id), $data->street, $data->city, $data->state);
+                $current_person->location = $new_location;
             }
         }
 
