@@ -1,1 +1,1 @@
-DELETE FROM jobs WHERE id = $1
+DELETE FROM locations WHERE id = $1
