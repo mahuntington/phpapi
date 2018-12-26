@@ -21,8 +21,16 @@ class Jobs {
         $query = file_get_contents(__DIR__ . '/../database/sql/jobs/find.sql');
         $result = pg_query($query);
         $jobs = array();
-        while($data = pg_fetch_object($result)){
-            $jobs[] = new Job(intval($data->id), intval($data->person_id), $data->job_type, intval($data->company_id));
+
+        $data = pg_fetch_object($result);
+        while($data){
+            $jobs[] = new Job(
+                intval($data->id),
+                intval($data->person_id),
+                $data->job_type,
+                intval($data->company_id)
+            );
+            $data = pg_fetch_object($result);
         }
 
         return $jobs;
