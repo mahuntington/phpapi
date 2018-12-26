@@ -11,7 +11,7 @@ SELECT
     companies.id AS company_id,
     companies.name AS company_name
 FROM people
-LEFT JOIN locations ON people.location_id = locations.id
+LEFT JOIN locations ON people.home_id = locations.id
 LEFT JOIN jobs ON people.id = jobs.person_id
 LEFT JOIN companies ON jobs.company_id = companies.id
-ORDER BY people.id ASC;
+ORDER BY people.id ASC

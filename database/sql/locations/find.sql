@@ -8,4 +8,4 @@ SELECT
     age
 FROM locations
 LEFT JOIN people ON locations.id = people.location_id
-ORDER BY locations.id;
+ORDER BY locations.id
