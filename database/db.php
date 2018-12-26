@@ -15,6 +15,6 @@ if(getenv('DATABASE_URL')){
         "dbname=".$dbname
     );
 } else {
-    $dbconn = pg_connect("host=localhost dbname=phpapi");
+    $dbconn = pg_connect("host=localhost dbname=contacts");
 }
 ?>
