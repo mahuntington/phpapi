@@ -1,4 +1,4 @@
-<?
+<?php
 include_once __DIR__ . '/../database/db.php';
 include_once __DIR__ . '/job.php';
 include_once __DIR__ . '/company.php';
