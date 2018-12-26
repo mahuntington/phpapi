@@ -7,5 +7,5 @@ SELECT
     name,
     age
 FROM locations
-LEFT JOIN people ON locations.id = people.location_id
+LEFT JOIN people ON locations.id = people.home_id
 ORDER BY locations.id
